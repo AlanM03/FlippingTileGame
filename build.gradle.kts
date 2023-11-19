@@ -14,7 +14,6 @@ repositories {
 dependencies {
     testImplementation(platform("org.junit:junit-bom:5.9.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
-    // Add your JavaFX dependencies here if needed
 }
 
 tasks.test {
@@ -26,12 +25,10 @@ application {
 }
 
 javafx {
-    version = "17.0.9" // Specify the JavaFX version
-    modules = listOf("javafx.controls", "javafx.fxml") // List the JavaFX modules you're using
-    // Add other modules as required
+    version = "17.0.9"
+    modules = listOf("javafx.controls", "javafx.fxml") // Current module list for JavaFX
 }
 
 tasks.named<JavaExec>("run") {
     standardInput = System.`in`
-    // If you need to pass VM options for JavaFX, you can do so here, although the plugin should handle it
 }
