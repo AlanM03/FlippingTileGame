@@ -1,5 +1,6 @@
 plugins {
     id("java")
+    id("application")
 }
 
 group = "org.fliptile"
@@ -17,3 +18,13 @@ dependencies {
 tasks.test {
     useJUnitPlatform()
 }
+
+application {
+    mainClass.set("org.fliptile.Main")
+}
+
+tasks.named<JavaExec>("run") {
+    standardInput = System.`in`
+}
+
+
