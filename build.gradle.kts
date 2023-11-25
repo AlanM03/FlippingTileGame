@@ -1,7 +1,7 @@
 plugins {
     id("java")
     id("application")
-    id("org.openjfx.javafxplugin") version "0.0.10"
+    id("org.openjfx.javafxplugin") version "0.1.0"
 }
 
 group = "org.fliptile"
@@ -21,7 +21,7 @@ tasks.test {
 }
 
 application {
-    mainClass.set("org.fliptile.Main")
+    mainClass.set("org.fliptile.view.Main")
 }
 
 javafx {

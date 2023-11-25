@@ -1,4 +1,4 @@
-package org.fliptile;
+package org.fliptile.model;
 
 import java.util.Collections;
 import java.util.ArrayList;

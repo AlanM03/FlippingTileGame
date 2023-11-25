@@ -1,4 +1,4 @@
-package org.fliptile;
+package org.fliptile.model;
 public class Tile {
     private final String imageIdentifier;
     private boolean isFlipped;

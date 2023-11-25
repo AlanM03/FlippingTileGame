@@ -1,4 +1,4 @@
-package org.fliptile;
+package org.fliptile.model;
 public class Player {
     private String name;
     private int score;

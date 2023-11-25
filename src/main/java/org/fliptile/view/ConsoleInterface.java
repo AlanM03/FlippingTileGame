@@ -1,4 +1,6 @@
-package org.fliptile;
+package org.fliptile.view;
+import org.fliptile.model.GameManager;
+
 import java.util.Scanner;
 
 public class ConsoleInterface {

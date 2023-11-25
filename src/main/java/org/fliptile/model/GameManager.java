@@ -1,4 +1,9 @@
-package org.fliptile;
+package org.fliptile.model;
+
+import org.fliptile.model.GameBoard;
+import org.fliptile.model.Player;
+import org.fliptile.model.Tile;
+
 public class GameManager {
     private GameBoard gameBoard;
     private final Player currentPlayer;

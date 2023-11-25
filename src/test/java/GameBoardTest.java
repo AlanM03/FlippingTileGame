@@ -1,4 +1,4 @@
-import org.fliptile.GameBoard;
+import org.fliptile.model.GameBoard;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 

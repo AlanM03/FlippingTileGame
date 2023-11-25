@@ -1,4 +1,6 @@
-package org.fliptile;
+package org.fliptile.view;
+
+import org.fliptile.model.GameManager;
 
 public class Main {
     public static void main(String[] args) {
