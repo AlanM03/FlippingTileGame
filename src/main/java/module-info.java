@@ -3,7 +3,7 @@ module org.fliptile {
     requires javafx.controls;
     requires javafx.fxml;
 
-    // Exports your packages to be accessible by JavaFX
+    // Exports packages to be accessible by JavaFX
     exports org.fliptile.view;
     exports org.fliptile.controller;
 
