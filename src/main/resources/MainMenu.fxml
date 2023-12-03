@@ -11,4 +11,47 @@
             fx:controller="org.fliptile.controller.MainMenuController"
             prefHeight="400.0" prefWidth="600.0">
 
+    <!-- Label for game title -->
+    <Label fx:id="header"
+           text="Memory Game Instructions:"
+           AnchorPane.topAnchor="20.0"
+           AnchorPane.leftAnchor="50.0"
+           AnchorPane.rightAnchor="50.0"
+           style="-fx-font-size: 24px; -fx-font-family: 'Tahoma'; -fx-text-fill: black; -fx-alignment: center;">
+    </Label>
+
+    <Label fx:id="instructionsLabel"
+           wrapText="true"
+           text="
+             1. A number of tiles are laid face down on a board.&#10;
+             2. Two tiles are flipped face up over each turn.&#10;
+             3. The objective of the game is to turn over pairs of matching tiles.&#10;
+             4. The game ends when all pairs are matched."
+           AnchorPane.topAnchor="80.0"
+           AnchorPane.leftAnchor="50.0"
+           AnchorPane.rightAnchor="50.0"
+           style="-fx-font-size: 18px; -fx-padding: 10; -fx-alignment: center;">
+    </Label>
+
+    <!-- Button to start the game -->
+    <Button fx:id="startButton"
+            text="Start Game"
+            AnchorPane.bottomAnchor="50.0"
+            AnchorPane.leftAnchor="50.0"
+            AnchorPane.rightAnchor="50.0"
+            style="-fx-font-size: 20px; -fx-background-color: black; -fx-text-fill: white;">
+    </Button>
+
+    <!-- HBox for option buttons -->
+    <HBox spacing="10" alignment="CENTER"
+          AnchorPane.bottomAnchor="100.0"
+          AnchorPane.leftAnchor="50.0"
+          AnchorPane.rightAnchor="50.0">
+        <children>
+            <ToggleButton fx:id="button4x4" text="4x4"/>
+            <ToggleButton fx:id="button6x6" text="6x6"/>
+            <ToggleButton fx:id="button8x8" text="8x8"/>
+        </children>
+    </HBox>
+
 </AnchorPane>
