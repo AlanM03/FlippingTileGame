@@ -1,5 +1,67 @@
 package org.fliptile.controller;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
+import org.fliptile.model.GameManager;
+
 public class GameViewController {
-    //placeholder
+
+    @FXML private GridPane tileGrid;
+    @FXML private Label scoreLabel;
+    @FXML private Label moveCountLabel;
+
+    private GameManager gameManager;
+    private Integer firstTileRow = null, firstTileColumn = null;
+
+    @FXML
+    public void initialize() {
+        gameManager = new GameManager("PlayerName");
+        setupGameBoard();
+    }
+
+    private void setupGameBoard() {
+        gameManager.startGame(4, 4);
+        for (int row = 0; row < 4; row++) {
+            for (int col = 0; col < 4; col++) {
+                Button tileButton = new Button();
+                tileButton.setMinSize(50, 50);
+                int finalRow = row;
+                int finalCol = col;
+                tileButton.setOnAction(e -> onTileClick(finalRow, finalCol));
+                tileGrid.add(tileButton, col, row);
+            }
+        }
+    }
+
+    public void onTileClick(int row, int col) {
+        if (firstTileRow == null || firstTileColumn == null) {
+            firstTileRow = row;
+            firstTileColumn = col;
+        } else {
+            gameManager.processMove(firstTileRow, firstTileColumn, row, col);
+            updateUI();
+            firstTileRow = null; // Reset for the next turn
+            firstTileColumn = null;
+        }
+    }
+
+    private void updateUI() {
+        scoreLabel.setText("Score: " + gameManager.getCurrentPlayer().getScore());
+        moveCountLabel.setText("Moves: " + gameManager.getMoveCount());
+        // Additional UI updates for tile states
+    }
+
+    @FXML
+    public void resetGame() {
+        gameManager.resetGame();
+        setupGameBoard();
+        updateUI();
+    }
+
+    @FXML
+    public void goToMainMenu() {
+        // Logic to switch back to the main menu
+    }
 }
