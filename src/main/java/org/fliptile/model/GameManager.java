@@ -1,9 +1,5 @@
 package org.fliptile.model;
 
-import org.fliptile.model.GameBoard;
-import org.fliptile.model.Player;
-import org.fliptile.model.Tile;
-
 public class GameManager {
     private GameBoard gameBoard;
     private final Player currentPlayer;
@@ -23,10 +19,13 @@ public class GameManager {
         moveCounter = 0;
     }
 
-    public void processMove(int row1, int col1, int row2, int col2) {
+    public boolean processMove(int row1, int col1, int row2, int col2) {
         if (!isGameInProgress) {
-            System.out.println("Game is not in progress. Please start a new game.");
-            return;
+            return false; // Game not in progress
+        }
+
+        if (!isValidMove(row1, col1, row2, col2)) {
+            throw new IllegalArgumentException("Invalid tile coordinates.");
         }
 
         moveCounter++;
@@ -36,27 +35,28 @@ public class GameManager {
 
         firstTile.flip();
         secondTile.flip();
-        gameBoard.displayBoard();
 
         if (gameBoard.checkMatch(firstTile, secondTile)) {
-            currentPlayer.updateScore(1); // Update score for a successful match
-            System.out.println("Match found! Score: " + currentPlayer.getScore());
+            currentPlayer.updateScore(1);
+            if (currentPlayer.getScore() == gameBoard.getTotalPairs()) {
+                isGameInProgress = false; // End game if maximum score is reached
+            }
         } else {
             firstTile.flip(); // Flip back if not a match
             secondTile.flip();
         }
 
-        if (gameBoard.isGameOver()) {
-            System.out.println("Game Over. Your score: " + currentPlayer.getScore());
-            isGameInProgress = false;
-        }
+        return isGameInProgress;
+    }
+
+    private boolean isValidMove(int row1, int col1, int row2, int col2) {
+        return row1 >= 0 && row1 < gameBoard.getRows() && col1 >= 0 && col1 < gameBoard.getColumns() &&
+                row2 >= 0 && row2 < gameBoard.getRows() && col2 >= 0 && col2 < gameBoard.getColumns();
     }
 
     public void resetGame() {
-        if(this.gameBoard != null){
-            int rows = this.gameBoard.getRows();
-            int columns = this.gameBoard.getColumns();
-            startGame(rows, columns);
+        if (this.gameBoard != null) {
+            startGame(gameBoard.getRows(), gameBoard.getColumns());
         }
     }
 
@@ -72,6 +72,9 @@ public class GameManager {
         return isGameInProgress;
     }
 
+    public boolean isGameOver() {
+        return !isGameInProgress;
+    }
     public int getMoveCount() {
         return moveCounter;
     }
