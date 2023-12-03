@@ -1,15 +1,27 @@
 package org.fliptile.controller;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
+import org.fliptile.model.GameManager;
+
 public class GameController {
 
-    public GameController() {
-        // Constructor
-        System.out.println("GameController constructed");
+    @FXML
+    private GridPane gameBoard;
+
+    @FXML
+    private Label scoreLabel;
+
+    @FXML
+    private Label moveCountLabel;
+
+    private GameManager gameManager;
+
+    @FXML
+    public void initialize() {
+        // Initialize your game manager and set up the game board
     }
 
-    public void someMethod() {
-        // Dummy method
-        System.out.println("This is an example method in GameController.");
-    }
-
+    // Add methods to handle game actions, update the UI, etc.
 }
