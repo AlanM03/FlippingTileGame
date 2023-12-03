@@ -2,7 +2,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="org.fliptile.controller.GameController">
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="org.fliptile.model.GameBoard">
     <center>
         <!-- Game board layout here -->
         <GridPane fx:id="gameBoard">
