@@ -8,16 +8,19 @@ public class GameManager {
     private GameBoard gameBoard;
     private final Player currentPlayer;
     private boolean isGameInProgress;
+    private int moveCounter;
 
     public GameManager(String playerName) {
         this.currentPlayer = new Player(playerName);
         this.isGameInProgress = false;
+        this.moveCounter = 0;
     }
 
     public void startGame(int rows, int columns) {
         this.gameBoard = new GameBoard(rows, columns);
         currentPlayer.updateScore(-currentPlayer.getScore());
         isGameInProgress = true;
+        moveCounter = 0;
     }
 
     public void processMove(int row1, int col1, int row2, int col2) {
@@ -25,6 +28,8 @@ public class GameManager {
             System.out.println("Game is not in progress. Please start a new game.");
             return;
         }
+
+        moveCounter++;
 
         Tile firstTile = gameBoard.getBoard()[row1][col1];
         Tile secondTile = gameBoard.getBoard()[row2][col2];
@@ -66,4 +71,9 @@ public class GameManager {
     public boolean isGameInProgress() {
         return isGameInProgress;
     }
+
+    public int getMoveCount() {
+        return moveCounter;
+    }
+
 }
