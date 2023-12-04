@@ -1,16 +1,26 @@
 package org.fliptile.model;
+
+import javafx.scene.image.Image;
+
 public class Tile {
     private final String imageIdentifier;
+    private final Image image;
     private boolean isFlipped;
 
     public Tile(String imageIdentifier) {
         this.imageIdentifier = imageIdentifier;
         this.isFlipped = false;
+        this.image = new Image(getClass().getResourceAsStream("/path/to/images/" + imageIdentifier + ".png"));
     }
 
-    public Tile(Tile otherTile) {
+    public Tile(Tile otherTile, Image image) {
         this.imageIdentifier = otherTile.imageIdentifier;
         this.isFlipped = otherTile.isFlipped;
+        this.image = otherTile.image;
+    }
+
+    public Image getImage() {
+        return image;
     }
 
     public void flip() {
