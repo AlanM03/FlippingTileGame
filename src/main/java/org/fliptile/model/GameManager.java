@@ -81,9 +81,7 @@ public class GameManager {
         return currentPlayer;
     }
 
-    public boolean isGameInProgress() {
-        return isGameInProgress;
-    }
+    public boolean isGameInProgress() { return isGameInProgress; }
 
     public boolean isGameOver() {
         return !isGameInProgress;
