@@ -41,7 +41,7 @@ public class GameViewController {
     }
 
     private void setupGameBoard() {
-        tileGrid.getChildren().clear(); // Clear existing tiles
+        tileGrid.getChildren().clear();
         gameManager.startGame(gridSize, gridSize);
         for (int row = 0; row < gridSize; row++) {
             for (int col = 0; col < gridSize; col++) {

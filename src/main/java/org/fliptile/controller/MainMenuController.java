@@ -23,7 +23,6 @@ public class MainMenuController {
 
     @FXML
     private void initialize() {
-        // Assign the buttons to the toggle group
         button4x4.setToggleGroup(group);
         button6x6.setToggleGroup(group);
         button8x8.setToggleGroup(group);
@@ -32,8 +31,7 @@ public class MainMenuController {
             if (newVal != null) {
                 String selectedLabel = ((ToggleButton)newVal).getText();
                 gridSize = Integer.parseInt(selectedLabel.substring(0, 1));
-                startButton.setDisable(false); // Enable the start button
-                // Update the state variable with gridSize
+                startButton.setDisable(false);
             }
         });
     }
@@ -44,16 +42,15 @@ public class MainMenuController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/GameView.fxml"));
             Parent root = loader.load();
 
-            // Assuming GameViewController is your controller for GameView.fxml
-            GameViewController controller = loader.getController();
-            controller.setGridSize(gridSize);  // You need to implement this method in GameViewController
 
-            Stage stage = (Stage) startButton.getScene().getWindow(); // Gets the current stage
+            GameViewController controller = loader.getController();
+            controller.setGridSize(gridSize);
+
+            Stage stage = (Stage) startButton.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-            // Handle exceptions
         }
     }
 
