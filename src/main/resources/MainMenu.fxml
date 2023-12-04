@@ -37,6 +37,7 @@
     <Button fx:id="startButton"
             text="Start Game"
             onAction="#startGame"
+            disable="true"
             AnchorPane.bottomAnchor="50.0"
             AnchorPane.leftAnchor="50.0"
             AnchorPane.rightAnchor="50.0"
