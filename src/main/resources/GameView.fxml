@@ -7,18 +7,18 @@
 
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fliptile.controller.GameViewController">
     <!-- Score and Moves Labels in an HBox -->
-    <HBox spacing="10" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="10">
+    <HBox spacing="10" alignment="CENTER" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10">
         <Label fx:id="scoreLabel" text="Score: 0" />
         <Label fx:id="moveCountLabel" text="Moves: 0" />
     </HBox>
 
     <!-- GridPane for Tiles -->
-    <GridPane fx:id="tileGrid" hgap="10" vgap="10" AnchorPane.topAnchor="50" AnchorPane.bottomAnchor="50" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10">
+    <GridPane fx:id="tileGrid" hgap="10" vgap="10" alignment="CENTER" AnchorPane.topAnchor="50" AnchorPane.bottomAnchor="50" AnchorPane.leftAnchor="50" AnchorPane.rightAnchor="50">
         <!-- Tiles will be added dynamically in the controller -->
     </GridPane>
 
     <!-- Control Buttons in an HBox -->
-    <HBox spacing="10" AnchorPane.bottomAnchor="10" AnchorPane.rightAnchor="10">
+    <HBox spacing="10" alignment="CENTER" AnchorPane.bottomAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10">
         <Button text="Reset Game" fx:id="resetButton" onAction="#resetGame" />
         <Button text="Main Menu" fx:id="mainMenuButton" onAction="#goToMainMenu" />
     </HBox>

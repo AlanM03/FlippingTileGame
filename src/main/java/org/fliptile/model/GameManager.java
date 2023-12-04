@@ -14,7 +14,7 @@ public class GameManager {
 
     public void startGame(int rows, int columns) {
         this.gameBoard = new GameBoard(rows, columns);
-        currentPlayer.updateScore(-currentPlayer.getScore());
+        currentPlayer.updateScore(0);
         isGameInProgress = true;
         moveCounter = 0;
     }
@@ -56,6 +56,7 @@ public class GameManager {
 
     public void resetGame() {
         if (this.gameBoard != null) {
+            currentPlayer.resetScore(); // Reset the score
             startGame(gameBoard.getRows(), gameBoard.getColumns());
         }
     }
@@ -78,5 +79,7 @@ public class GameManager {
     public int getMoveCount() {
         return moveCounter;
     }
+
+
 
 }
