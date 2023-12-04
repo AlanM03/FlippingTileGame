@@ -1,12 +1,25 @@
 package org.fliptile.controller;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 import org.fliptile.model.GameManager;
 
+import java.io.IOException;
+
 public class GameViewController {
+
+    private int gridSize;
+
+    public void setGridSize(int gridSize) {
+        this.gridSize = gridSize;
+        setupGameBoard();
+    }
 
     @FXML private GridPane tileGrid;
     @FXML private Label scoreLabel;
@@ -22,9 +35,9 @@ public class GameViewController {
     }
 
     private void setupGameBoard() {
-        gameManager.startGame(4, 4);
-        for (int row = 0; row < 4; row++) {
-            for (int col = 0; col < 4; col++) {
+        gameManager.startGame(gridSize, gridSize);
+        for (int row = 0; row < gridSize; row++) {
+            for (int col = 0; col < gridSize; col++) {
                 Button tileButton = new Button();
                 tileButton.setMinSize(50, 50);
                 int finalRow = row;
@@ -50,7 +63,6 @@ public class GameViewController {
     private void updateUI() {
         scoreLabel.setText("Score: " + gameManager.getCurrentPlayer().getScore());
         moveCountLabel.setText("Moves: " + gameManager.getMoveCount());
-        // Additional UI updates for tile states
     }
 
     @FXML
@@ -62,6 +74,14 @@ public class GameViewController {
 
     @FXML
     public void goToMainMenu() {
-        // Logic to switch back to the main menu
+        try {
+            Parent mainMenuRoot = FXMLLoader.load(getClass().getResource("/MainMenu.fxml"));
+            Scene mainMenuScene = new Scene(mainMenuRoot);
+
+            Stage currentStage = (Stage) tileGrid.getScene().getWindow();
+            currentStage.setScene(mainMenuScene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

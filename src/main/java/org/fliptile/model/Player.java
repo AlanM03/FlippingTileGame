@@ -40,4 +40,8 @@ public class Player {
                 ", score=" + score +
                 '}';
     }
+
+    public void resetScore() {
+        this.score = 0;
+    }
 }
