@@ -61,43 +61,55 @@ public class GameViewController {
         }
 
         Tile clickedTile = gameManager.getGameBoard().getBoard()[row][col];
-        if (clickedTile.isMatched()) {
-            return; // Ignore clicks on already matched tiles
+        if (clickedTile.isMatched() || clickedTile.isFlipped()) {
+            return;
         }
 
-        Button tileButton = (Button) tileGrid.getChildren().get(row * gridSize + col);
         clickedTile.flip();
+        Button tileButton = (Button) tileGrid.getChildren().get(row * gridSize + col);
         updateTileImage(clickedTile, tileButton);
 
-        if (firstTileRow != null && firstTileColumn != null && !(firstTileRow == row && firstTileColumn == col)) {
-            isProcessingMove = true;
-            gameManager.processMove(firstTileRow, firstTileColumn, row, col);
-            updateUI();
-
-            if (!clickedTile.matches(gameManager.getGameBoard().getBoard()[firstTileRow][firstTileColumn])) {
-                final int savedFirstTileRow = firstTileRow;
-                final int savedFirstTileColumn = firstTileColumn;
-
-                PauseTransition pause = new PauseTransition(Duration.seconds(1));
-                pause.setOnFinished(event -> {
-                    Tile firstTile = gameManager.getGameBoard().getBoard()[savedFirstTileRow][savedFirstTileColumn];
-                    Button firstButton = (Button) tileGrid.getChildren().get(savedFirstTileRow * gridSize + savedFirstTileColumn);
-                    firstTile.flip();
-                    clickedTile.flip();
-                    updateTileImage(firstTile, firstButton);
-                    updateTileImage(clickedTile, tileButton);
-                    isProcessingMove = false;
-                });
-                pause.play();
-            } else {
-                isProcessingMove = false;
-            }
-            firstTileRow = null;
-            firstTileColumn = null;
+        if (firstTileRow != null && firstTileColumn != null) {
+            processSecondTile(row, col, clickedTile);
         } else {
             firstTileRow = row;
             firstTileColumn = col;
         }
+    }
+
+    private void processSecondTile(int row, int col, Tile clickedTile) {
+        isProcessingMove = true;
+        gameManager.processMove(firstTileRow, firstTileColumn, row, col);
+        updateUI();
+
+        if (!clickedTile.matches(gameManager.getGameBoard().getBoard()[firstTileRow][firstTileColumn])) {
+            pauseAndFlipBackTiles(row, col);
+        } else {
+            isProcessingMove = false;
+        }
+        firstTileRow = null;
+        firstTileColumn = null;
+    }
+
+    private void pauseAndFlipBackTiles(int secondRow, int secondCol) {
+        final int savedFirstTileRow = firstTileRow;
+        final int savedFirstTileColumn = firstTileColumn;
+
+        PauseTransition pause = new PauseTransition(Duration.seconds(1));
+        pause.setOnFinished(event -> {
+            flipBackTiles(savedFirstTileRow, savedFirstTileColumn, secondRow, secondCol);
+            isProcessingMove = false;
+        });
+        pause.play();
+    }
+
+    private void flipBackTiles(int firstRow, int firstCol, int secondRow, int secondCol) {
+        Tile firstTile = gameManager.getGameBoard().getBoard()[firstRow][firstCol];
+        Tile secondTile = gameManager.getGameBoard().getBoard()[secondRow][secondCol];
+        firstTile.flip();
+        secondTile.flip();
+        updateTileImage(firstTile, (Button) tileGrid.getChildren().get(firstRow * gridSize + firstCol));
+        updateTileImage(secondTile, (Button) tileGrid.getChildren().get(secondRow * gridSize + secondCol));
     }
 
     private void updateTileImage(Tile tile, Button tileButton) {
