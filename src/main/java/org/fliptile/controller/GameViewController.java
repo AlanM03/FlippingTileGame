@@ -31,7 +31,6 @@ public class GameViewController {
     @FXML
     public void initialize() {
         gameManager = new GameManager("PlayerName");
-        setupGameBoard();
     }
 
     private void setupGameBoard() {

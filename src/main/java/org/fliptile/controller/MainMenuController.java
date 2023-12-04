@@ -32,6 +32,7 @@ public class MainMenuController {
             if (newVal != null) {
                 String selectedLabel = ((ToggleButton)newVal).getText();
                 gridSize = Integer.parseInt(selectedLabel.substring(0, 1));
+                startButton.setDisable(false); // Enable the start button
                 // Update the state variable with gridSize
             }
         });
