@@ -15,6 +15,7 @@ import org.fliptile.model.GameManager;
 import org.fliptile.model.Tile;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class GameViewController {
 
@@ -40,6 +41,7 @@ public class GameViewController {
     }
 
     private void setupGameBoard() {
+        tileGrid.getChildren().clear(); // Clear existing tiles
         gameManager.startGame(gridSize, gridSize);
         for (int row = 0; row < gridSize; row++) {
             for (int col = 0; col < gridSize; col++) {
@@ -55,17 +57,20 @@ public class GameViewController {
 
     public void onTileClick(int row, int col) {
         if (isProcessingMove) {
-            return; // Ignore clicks while processing a move
+            return;
         }
 
         Tile clickedTile = gameManager.getGameBoard().getBoard()[row][col];
-        Button tileButton = (Button) tileGrid.getChildren().get(row * gridSize + col);
+        if (clickedTile.isMatched()) {
+            return; // Ignore clicks on already matched tiles
+        }
 
+        Button tileButton = (Button) tileGrid.getChildren().get(row * gridSize + col);
         clickedTile.flip();
         updateTileImage(clickedTile, tileButton);
 
         if (firstTileRow != null && firstTileColumn != null && !(firstTileRow == row && firstTileColumn == col)) {
-            isProcessingMove = true; // Set flag to true as move is being processed
+            isProcessingMove = true;
             gameManager.processMove(firstTileRow, firstTileColumn, row, col);
             updateUI();
 
@@ -81,11 +86,11 @@ public class GameViewController {
                     clickedTile.flip();
                     updateTileImage(firstTile, firstButton);
                     updateTileImage(clickedTile, tileButton);
-                    isProcessingMove = false; // Reset flag after processing the move
+                    isProcessingMove = false;
                 });
                 pause.play();
             } else {
-                isProcessingMove = false; // Reset flag immediately if tiles match
+                isProcessingMove = false;
             }
             firstTileRow = null;
             firstTileColumn = null;
@@ -121,7 +126,7 @@ public class GameViewController {
     @FXML
     public void goToMainMenu() {
         try {
-            Parent mainMenuRoot = FXMLLoader.load(getClass().getResource("/MainMenu.fxml"));
+            Parent mainMenuRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/MainMenu.fxml")));
             Scene mainMenuScene = new Scene(mainMenuRoot);
 
             Stage currentStage = (Stage) tileGrid.getScene().getWindow();

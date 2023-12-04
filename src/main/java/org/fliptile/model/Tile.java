@@ -8,6 +8,7 @@ public class Tile {
     private final String imageIdentifier;
     private final Image image;
     private boolean isFlipped;
+    private boolean isMatched = false;
 
     public Tile(String imageIdentifier) {
         this.imageIdentifier = imageIdentifier;
@@ -47,5 +48,9 @@ public class Tile {
                 "imageIdentifier='" + imageIdentifier + '\'' +
                 ", isFlipped=" + isFlipped +
                 '}';
+    }
+
+    public boolean isMatched() {
+        return isMatched;
     }
 }
