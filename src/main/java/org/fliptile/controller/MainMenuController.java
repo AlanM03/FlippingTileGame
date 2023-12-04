@@ -31,9 +31,9 @@ public class MainMenuController {
         group.selectedToggleProperty().addListener((observable, oldVal, newVal) -> {
             if (newVal != null) {
                 String selectedLabel = ((ToggleButton)newVal).getText();
-                gridSize = Integer.parseInt(selectedLabel.substring(0, 1));
+                gridSize = Integer.parseInt(selectedLabel.substring(0, 1));// Updates the state variable with gridSize
                 startButton.setDisable(false); // Enable the start button
-                // Update the state variable with gridSize
+
             }
         });
     }
@@ -44,16 +44,15 @@ public class MainMenuController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/GameView.fxml"));
             Parent root = loader.load();
 
-            // Assuming GameViewController is your controller for GameView.fxml
             GameViewController controller = loader.getController();
-            controller.setGridSize(gridSize);  // You need to implement this method in GameViewController
+            controller.setGridSize(gridSize);  //Sets grid size in GameViewController
 
-            Stage stage = (Stage) startButton.getScene().getWindow(); // Gets the current stage
+            Stage stage = (Stage) startButton.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-            // Handle exceptions
+
         }
     }
 
