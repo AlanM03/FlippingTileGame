@@ -10,7 +10,7 @@ public class Tile {
     public Tile(String imageIdentifier) {
         this.imageIdentifier = imageIdentifier;
         this.isFlipped = false;
-        this.image = new Image(getClass().getResourceAsStream("/path/to/images/" + imageIdentifier + ".png"));
+        this.image = new Image(getClass().getResourceAsStream("/images/" + imageIdentifier + ".png"));
     }
 
     public Tile(Tile otherTile, Image image) {
