@@ -71,10 +71,12 @@ public class GameViewController {
 
         if (firstTileRow != null && firstTileColumn != null) {
             processSecondTile(row, col, clickedTile);
+
         } else {
             firstTileRow = row;
             firstTileColumn = col;
         }
+
     }
 
     private void processSecondTile(int row, int col, Tile clickedTile) {
@@ -86,9 +88,11 @@ public class GameViewController {
             pauseAndFlipBackTiles(row, col);
         } else {
             isProcessingMove = false;
+            checkGameOver();
         }
         firstTileRow = null;
         firstTileColumn = null;
+
     }
 
     private void pauseAndFlipBackTiles(int secondRow, int secondCol) {
@@ -99,6 +103,7 @@ public class GameViewController {
         pause.setOnFinished(event -> {
             flipBackTiles(savedFirstTileRow, savedFirstTileColumn, secondRow, secondCol);
             isProcessingMove = false;
+            checkGameOver();
         });
         pause.play();
     }
@@ -133,6 +138,30 @@ public class GameViewController {
         gameManager.resetGame();
         setupGameBoard();
         updateUI();
+    }
+
+    private void checkGameOver() {
+        if (gameManager.isGameOver()) {
+            goToVictoryScreen();
+        }
+    }
+
+    private void goToVictoryScreen() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Victory.fxml"));
+            Parent victoryRoot = loader.load();
+            VictoryViewController controller = loader.getController();
+
+
+            controller.setScoreLabel(gameManager.getCurrentPlayer().getScore());
+            controller.setMoveCountLabel(gameManager.getMoveCount());
+
+            Scene victoryScene = new Scene(victoryRoot);
+            Stage currentStage = (Stage) tileGrid.getScene().getWindow();
+            currentStage.setScene(victoryScene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
