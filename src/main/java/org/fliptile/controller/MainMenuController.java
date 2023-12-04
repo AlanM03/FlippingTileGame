@@ -12,6 +12,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Controller class for the main menu of the memory game.
+ */
 public class MainMenuController {
     @FXML private ToggleButton button4x4;
     @FXML private ToggleButton button6x6;
@@ -21,6 +24,9 @@ public class MainMenuController {
     private final ToggleGroup group = new ToggleGroup();
     private int gridSize;
 
+    /**
+     * Initializes the main menu UI elements and sets up the toggle group for the grid size selection.
+     */
     @FXML
     private void initialize() {
         button4x4.setToggleGroup(group);
@@ -36,6 +42,10 @@ public class MainMenuController {
         });
     }
 
+    /**
+     * Starts the game with the selected grid size when the start button is clicked.
+     * Loads the game view and passes the grid size to the GameViewController.
+     */
     @FXML
     private void startGame() {
         try {

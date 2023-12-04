@@ -17,16 +17,12 @@ import org.fliptile.model.Tile;
 import java.io.IOException;
 import java.util.Objects;
 
+/**
+ * Controller class for managing the game view in a memory game.
+ */
 public class GameViewController {
-
     private int gridSize;
-
     private boolean isProcessingMove;
-
-    public void setGridSize(int gridSize) {
-        this.gridSize = gridSize;
-        setupGameBoard();
-    }
 
     @FXML private GridPane tileGrid;
     @FXML private Label scoreLabel;
@@ -35,11 +31,27 @@ public class GameViewController {
     private GameManager gameManager;
     private Integer firstTileRow = null, firstTileColumn = null;
 
+    /**
+     * Initializes the game manager and sets up the initial game state.
+     */
     @FXML
     public void initialize() {
         gameManager = new GameManager("PlayerName");
     }
 
+    /**
+     * Sets the size of the grid for the game board and initializes the game board.
+     *
+     * @param gridSize The size of the grid (number of rows and columns).
+     */
+    public void setGridSize(int gridSize) {
+        this.gridSize = gridSize;
+        setupGameBoard();
+    }
+
+    /**
+     * Sets up the game board with clickable tiles.
+     */
     private void setupGameBoard() {
         tileGrid.getChildren().clear();
         gameManager.startGame(gridSize, gridSize);
@@ -55,6 +67,12 @@ public class GameViewController {
         }
     }
 
+    /**
+     * Handles tile clicks, processing game logic based on the state of the clicked tile.
+     *
+     * @param row The row of the clicked tile.
+     * @param col The column of the clicked tile.
+     */
     public void onTileClick(int row, int col) {
         if (isProcessingMove) {
             return;
@@ -79,6 +97,13 @@ public class GameViewController {
 
     }
 
+    /**
+     * Processes the second tile click in a move, checking for matches and updating the game state.
+     *
+     * @param row The row of the second clicked tile.
+     * @param col The column of the second clicked tile.
+     * @param clickedTile The tile object of the clicked tile.
+     */
     private void processSecondTile(int row, int col, Tile clickedTile) {
         isProcessingMove = true;
         gameManager.processMove(firstTileRow, firstTileColumn, row, col);
@@ -95,6 +120,12 @@ public class GameViewController {
 
     }
 
+    /**
+     * Pauses the game for a brief moment before flipping back unmatched tiles.
+     *
+     * @param secondRow The row of the second tile.
+     * @param secondCol The column of the second tile.
+     */
     private void pauseAndFlipBackTiles(int secondRow, int secondCol) {
         final int savedFirstTileRow = firstTileRow;
         final int savedFirstTileColumn = firstTileColumn;
@@ -108,6 +139,14 @@ public class GameViewController {
         pause.play();
     }
 
+    /**
+     * Flips back the tiles that were not matched.
+     *
+     * @param firstRow The row of the first tile.
+     * @param firstCol The column of the first tile.
+     * @param secondRow The row of the second tile.
+     * @param secondCol The column of the second tile.
+     */
     private void flipBackTiles(int firstRow, int firstCol, int secondRow, int secondCol) {
         Tile firstTile = gameManager.getGameBoard().getBoard()[firstRow][firstCol];
         Tile secondTile = gameManager.getGameBoard().getBoard()[secondRow][secondCol];
@@ -117,6 +156,12 @@ public class GameViewController {
         updateTileImage(secondTile, (Button) tileGrid.getChildren().get(secondRow * gridSize + secondCol));
     }
 
+    /**
+     * Updates the image of a tile on the game board.
+     *
+     * @param tile The tile to update.
+     * @param tileButton The button representing the tile on the UI.
+     */
     private void updateTileImage(Tile tile, Button tileButton) {
         if (tile.isFlipped()) {
             ImageView tileImage = new ImageView(tile.getImage());
@@ -128,11 +173,17 @@ public class GameViewController {
         }
     }
 
+    /**
+     * Updates the UI elements such as the score label and move count label.
+     */
     private void updateUI() {
         scoreLabel.setText("Score: " + gameManager.getCurrentPlayer().getScore());
         moveCountLabel.setText("Moves: " + gameManager.getMoveCount());
     }
 
+    /**
+     * Resets the game to its initial state.
+     */
     @FXML
     public void resetGame() {
         gameManager.resetGame();
@@ -140,12 +191,18 @@ public class GameViewController {
         updateUI();
     }
 
+    /**
+     * Checks if the game is over and transitions to the victory screen if it is.
+     */
     private void checkGameOver() {
         if (gameManager.isGameOver()) {
             goToVictoryScreen();
         }
     }
 
+    /**
+     * Transitions the UI to the victory screen upon game completion.
+     */
     private void goToVictoryScreen() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Victory.fxml"));
@@ -164,6 +221,9 @@ public class GameViewController {
         }
     }
 
+    /**
+     * Transitions the UI to the main menu.
+     */
     @FXML
     public void goToMainMenu() {
         try {
