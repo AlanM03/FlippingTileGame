@@ -46,7 +46,7 @@ public class GameViewController {
         for (int row = 0; row < gridSize; row++) {
             for (int col = 0; col < gridSize; col++) {
                 Button tileButton = new Button();
-                tileButton.setMinSize(50, 50);
+                tileButton.setMinSize(80, 80);
                 int finalRow = row;
                 int finalCol = col;
                 tileButton.setOnAction(e -> onTileClick(finalRow, finalCol));
@@ -115,8 +115,8 @@ public class GameViewController {
     private void updateTileImage(Tile tile, Button tileButton) {
         if (tile.isFlipped()) {
             ImageView tileImage = new ImageView(tile.getImage());
-            tileImage.setFitWidth(50);
-            tileImage.setFitHeight(50);
+            tileImage.setFitWidth(60);
+            tileImage.setFitHeight(60);
             tileButton.setGraphic(tileImage);
         } else {
             tileButton.setGraphic(null);
