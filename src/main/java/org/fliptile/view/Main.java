@@ -22,6 +22,7 @@ public class Main extends Application {
      * @throws Exception if there is any issue in loading the FXML file or setting up the stage.
      */
     @Override
+
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("MainMenu.fxml")));
         primaryStage.setTitle("Flipping Tile Game");

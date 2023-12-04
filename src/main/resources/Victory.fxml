@@ -4,6 +4,7 @@
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
 <AnchorPane xmlns="http://javafx.com/javafx"
@@ -13,15 +14,23 @@
 
         <Label fx:id="Victory"
                text="You Win!"
-               AnchorPane.topAnchor="200.0"
+               AnchorPane.topAnchor="50.0"
                AnchorPane.leftAnchor="50.0"
                AnchorPane.rightAnchor="50.0"
                style="-fx-font-size: 50px; -fx-font-family: 'Tahoma'; -fx-text-fill: black; -fx-alignment: center;">
         </Label>
 
-        <HBox spacing="20" alignment="CENTER" AnchorPane.topAnchor="300.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
+        <HBox spacing="20" alignment="CENTER" AnchorPane.topAnchor="120.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
             <Label fx:id="scoreLabel" text="Score: " style="-fx-font-size: 20px; -fx-text-fill: black;" />
             <Label fx:id="moveCountLabel" text="Moves: " style="-fx-font-size: 20px; -fx-text-fill: black;" />
         </HBox>
 
-        </AnchorPane>
+    <HBox alignment="CENTER" AnchorPane.topAnchor="200.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
+        <ImageView>
+            <image>
+                <Image url="griffin.gif"/>
+            </image>
+        </ImageView>
+    </HBox>
+
+</AnchorPane>
