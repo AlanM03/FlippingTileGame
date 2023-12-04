@@ -14,6 +14,13 @@ import java.io.IOException;
 
 public class GameViewController {
 
+    private int gridSize;
+
+    public void setGridSize(int gridSize) {
+        this.gridSize = gridSize;
+        setupGameBoard();
+    }
+
     @FXML private GridPane tileGrid;
     @FXML private Label scoreLabel;
     @FXML private Label moveCountLabel;
@@ -28,9 +35,9 @@ public class GameViewController {
     }
 
     private void setupGameBoard() {
-        gameManager.startGame(4, 4);
-        for (int row = 0; row < 4; row++) {
-            for (int col = 0; col < 4; col++) {
+        gameManager.startGame(gridSize, gridSize);
+        for (int row = 0; row < gridSize; row++) {
+            for (int col = 0; col < gridSize; col++) {
                 Button tileButton = new Button();
                 tileButton.setMinSize(50, 50);
                 int finalRow = row;
