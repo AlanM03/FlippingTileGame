@@ -10,7 +10,8 @@ public class GameBoard {
     private final int columns;
     private int remainingPairs;
 
-    public GameBoard(int rows, int columns) {
+
+    public GameBoard(int rows, int columns, List<String> imageIdentifiers) {
         if (rows * columns % 2 != 0) {
             throw new IllegalArgumentException("The number of tiles must be even.");
         }
@@ -19,28 +20,23 @@ public class GameBoard {
         this.columns = columns;
         this.board = new Tile[rows][columns];
         this.remainingPairs = (rows * columns) / 2;
-        initializeBoard();
+        initializeBoard(imageIdentifiers);
     }
 
-    private void initializeBoard() {
+    private void initializeBoard(List<String> imageIdentifiers) {
         List<Tile> tiles = new ArrayList<>();
-        int pairId = 1;
-
-        for (int i = 0; i < remainingPairs; i++) {
-            Tile tile1 = new Tile("Pair " + pairId);
-            Tile tile2 = new Tile("Pair " + pairId);
+        for (String identifier : imageIdentifiers) {
+            Tile tile1 = new Tile(identifier);
+            Tile tile2 = new Tile(identifier);
             tiles.add(tile1);
             tiles.add(tile2);
-            pairId++;
         }
-
         Collections.shuffle(tiles);
 
         int tileIndex = 0;
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < columns; col++) {
-                board[row][col] = tiles.get(tileIndex);
-                tileIndex++;
+                board[row][col] = tiles.get(tileIndex++);
             }
         }
     }

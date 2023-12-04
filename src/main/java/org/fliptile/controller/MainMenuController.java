@@ -18,12 +18,11 @@ public class MainMenuController {
     @FXML private ToggleButton button8x8;
     @FXML private Button startButton;
 
-    private ToggleGroup group = new ToggleGroup();
+    private final ToggleGroup group = new ToggleGroup();
     private int gridSize;
 
     @FXML
     private void initialize() {
-        // Assign the buttons to the toggle group
         button4x4.setToggleGroup(group);
         button6x6.setToggleGroup(group);
         button8x8.setToggleGroup(group);
@@ -31,9 +30,8 @@ public class MainMenuController {
         group.selectedToggleProperty().addListener((observable, oldVal, newVal) -> {
             if (newVal != null) {
                 String selectedLabel = ((ToggleButton)newVal).getText();
-                gridSize = Integer.parseInt(selectedLabel.substring(0, 1));// Updates the state variable with gridSize
-                startButton.setDisable(false); // Enable the start button
-
+                gridSize = Integer.parseInt(selectedLabel.substring(0, 1));
+                startButton.setDisable(false);
             }
         });
     }
@@ -45,14 +43,13 @@ public class MainMenuController {
             Parent root = loader.load();
 
             GameViewController controller = loader.getController();
-            controller.setGridSize(gridSize);  //Sets grid size in GameViewController
+            controller.setGridSize(gridSize);
 
             Stage stage = (Stage) startButton.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-
         }
     }
 

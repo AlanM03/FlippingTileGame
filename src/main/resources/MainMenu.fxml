@@ -33,7 +33,6 @@
            style="-fx-font-size: 18px; -fx-padding: 10; -fx-alignment: center;">
     </Label>
 
-    <!-- Button to start the game -->
     <Button fx:id="startButton"
             text="Start Game"
             onAction="#startGame"
@@ -44,7 +43,6 @@
             style="-fx-font-size: 20px; -fx-background-color: black; -fx-text-fill: white;">
     </Button>
 
-    <!-- HBox for option buttons -->
     <HBox spacing="10" alignment="CENTER"
           AnchorPane.bottomAnchor="100.0"
           AnchorPane.leftAnchor="50.0"

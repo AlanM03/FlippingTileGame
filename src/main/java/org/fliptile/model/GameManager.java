@@ -1,5 +1,8 @@
 package org.fliptile.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GameManager {
     private GameBoard gameBoard;
     private final Player currentPlayer;
@@ -13,15 +16,24 @@ public class GameManager {
     }
 
     public void startGame(int rows, int columns) {
-        this.gameBoard = new GameBoard(rows, columns);
-        currentPlayer.updateScore(0);
+        List<String> imageIdentifiers = getImageIdentifiersForBoardSize((rows * columns) / 2);
+        this.gameBoard = new GameBoard(rows, columns, imageIdentifiers);
+        currentPlayer.resetScore();
         isGameInProgress = true;
         moveCounter = 0;
     }
 
+    private List<String> getImageIdentifiersForBoardSize(int pairs) {
+        List<String> identifiers = new ArrayList<>();
+        for (int i = 1; i <= pairs; i++) {
+            identifiers.add("image" + i);
+        }
+        return identifiers;
+    }
+
     public boolean processMove(int row1, int col1, int row2, int col2) {
         if (!isGameInProgress) {
-            return false; // Game not in progress
+            return false;
         }
 
         if (!isValidMove(row1, col1, row2, col2)) {
@@ -56,7 +68,7 @@ public class GameManager {
 
     public void resetGame() {
         if (this.gameBoard != null) {
-            currentPlayer.resetScore(); // Reset the score
+            currentPlayer.resetScore();
             startGame(gameBoard.getRows(), gameBoard.getColumns());
         }
     }
