@@ -25,8 +25,7 @@ public class GameBoard {
 
     private void initializeBoard(List<String> imageIdentifiers) {
         List<Tile> tiles = new ArrayList<>();
-        for (int i = 0; i < imageIdentifiers.size(); i++) {
-            String identifier = imageIdentifiers.get(i);
+        for (String identifier : imageIdentifiers) {
             Tile tile1 = new Tile(identifier);
             Tile tile2 = new Tile(identifier);
             tiles.add(tile1);

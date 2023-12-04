@@ -2,6 +2,8 @@ package org.fliptile.model;
 
 import javafx.scene.image.Image;
 
+import java.util.Objects;
+
 public class Tile {
     private final String imageIdentifier;
     private final Image image;
@@ -10,7 +12,7 @@ public class Tile {
     public Tile(String imageIdentifier) {
         this.imageIdentifier = imageIdentifier;
         this.isFlipped = false;
-        this.image = new Image(getClass().getResourceAsStream("/images/" + imageIdentifier + ".png"));
+        this.image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/" + imageIdentifier + ".png")));
     }
 
     public Tile(Tile otherTile, Image image) {

@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.InputStream;
 import java.util.Objects;
 
 public class Main extends Application {
@@ -19,6 +20,23 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+        checkImagesExistence();
         launch(args);
+    }
+
+    private static void checkImagesExistence() {
+        for (int i = 1; i <= 32; i++) {
+            String path = "/images/image" + i + ".png";
+            InputStream is = Main.class.getResourceAsStream(path);
+            if (is == null) {
+                System.out.println("Cannot find image: " + path);
+            } else {
+                try {
+                    is.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }
