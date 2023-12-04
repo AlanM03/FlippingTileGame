@@ -20,6 +20,8 @@ public class GameViewController {
 
     private int gridSize;
 
+    private boolean isProcessingMove;
+
     public void setGridSize(int gridSize) {
         this.gridSize = gridSize;
         setupGameBoard();
@@ -52,35 +54,38 @@ public class GameViewController {
     }
 
     public void onTileClick(int row, int col) {
+        if (isProcessingMove) {
+            return; // Ignore clicks while processing a move
+        }
+
         Tile clickedTile = gameManager.getGameBoard().getBoard()[row][col];
         Button tileButton = (Button) tileGrid.getChildren().get(row * gridSize + col);
 
-        // Flip the tile
         clickedTile.flip();
-
-        // Update tile image
         updateTileImage(clickedTile, tileButton);
 
-        // If it was the second tile clicked, process the move
         if (firstTileRow != null && firstTileColumn != null && !(firstTileRow == row && firstTileColumn == col)) {
+            isProcessingMove = true; // Set flag to true as move is being processed
             gameManager.processMove(firstTileRow, firstTileColumn, row, col);
             updateUI();
-            // Flip the tiles back if they are not a match after a short delay
+
             if (!clickedTile.matches(gameManager.getGameBoard().getBoard()[firstTileRow][firstTileColumn])) {
                 final int savedFirstTileRow = firstTileRow;
                 final int savedFirstTileColumn = firstTileColumn;
 
                 PauseTransition pause = new PauseTransition(Duration.seconds(1));
                 pause.setOnFinished(event -> {
-                    // Use savedFirstTileRow and savedFirstTileColumn here
                     Tile firstTile = gameManager.getGameBoard().getBoard()[savedFirstTileRow][savedFirstTileColumn];
                     Button firstButton = (Button) tileGrid.getChildren().get(savedFirstTileRow * gridSize + savedFirstTileColumn);
                     firstTile.flip();
                     clickedTile.flip();
                     updateTileImage(firstTile, firstButton);
                     updateTileImage(clickedTile, tileButton);
+                    isProcessingMove = false; // Reset flag after processing the move
                 });
                 pause.play();
+            } else {
+                isProcessingMove = false; // Reset flag immediately if tiles match
             }
             firstTileRow = null;
             firstTileColumn = null;
