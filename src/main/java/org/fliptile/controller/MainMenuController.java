@@ -18,7 +18,7 @@ public class MainMenuController {
     @FXML private ToggleButton button8x8;
     @FXML private Button startButton;
 
-    private ToggleGroup group = new ToggleGroup();
+    private final ToggleGroup group = new ToggleGroup();
     private int gridSize;
 
     @FXML
@@ -41,7 +41,6 @@ public class MainMenuController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/GameView.fxml"));
             Parent root = loader.load();
-
 
             GameViewController controller = loader.getController();
             controller.setGridSize(gridSize);
