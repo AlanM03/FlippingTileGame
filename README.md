@@ -36,7 +36,10 @@ FlippingTileProject/
 └───test/ -- Test classes with JUnit 5
     ├───java/
     │       GameBoardTest.java
-    │  
+    │       GameManagerTest.java
+    │       PlayerTest.java
+    │       TileTest.java
+    │
     └───resources/
 ```
 
