@@ -53,6 +53,7 @@ FlippingTileProject/
 1. Clone the repository: `git clone https://github.com/ddamme05/FlippingTile.git`
 2. Navigate to the project directory: `cd FlippingTileProject`
 3. Build the project using Gradle: `./gradlew build`
+4. Run the project using Gradle `./gradlew run`
 
 ## Usage
 To play the game, follow these steps:
