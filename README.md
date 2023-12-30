@@ -1,5 +1,9 @@
 # Flipping Tile Memory Game
 
+## Authors
+- [**Alan Mackiewicz**](https://github.com/AlanM03)
+- [**Dilans Damme**](https://github.com/ddamme05)
+
 ## Introduction
 This project is a tile-flipping card game developed using Java with JavaFX. It's a fun and engaging game where players flip tiles to reveal playing cards, aiming to match pairs. The game comes with three different board sizes: 4x4, 6x6, and 8x8, catering to various difficulty levels. Players can keep track of their scores, making it perfect for both casual gaming and challenging play.
 
